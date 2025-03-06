@@ -1,6 +1,6 @@
 // UC-1: Check Employee Presence
 const IS_ABSENT = 0;
-let empCheck = Math.floor(Math.random() * 10) % 2; // Generates 0 or 1
+let empCheck = Math.floor(Math.random() * 10) % 2; // Generates either 0 or 1 randomly
 if (empCheck === IS_ABSENT) {
     console.log("Employee is Absent");
 } else {
@@ -26,7 +26,7 @@ function getWorkingHours(empCheck) {
     }
 }
 
-// UC-3: Calculate Daily Wage
+// UC-3: Calculate Daily Wage Based on Employee Type
 let empCheckUC3 = Math.floor(Math.random() * 10) % 3; // Generates 0, 1, or 2
 let empHrsUC3 = getWorkingHours(empCheckUC3);
 let empWageUC3 = empHrsUC3 * WAGE_PER_HOUR;
@@ -44,3 +44,20 @@ for (let day = 0; day < NUM_OF_WORKING_DAYS; day++) {
 
 // Calculate and Display Monthly Wage
 console.log(`Total Monthly Hours: ${totalEmpHrs}, Total Monthly Wage: ${totalEmpHrs * WAGE_PER_HOUR}`);
+
+// UC-5: Calculate Wages Till a Condition of Total Working Hours or Days is Reached
+const MAX_HRS_IN_MONTH = 100;
+const NUM_OF_WORKING_DAYS_LIMIT = 10;
+let totalEmpHrsLimit = 0;
+let totalWorkingDaysLimit = 0;
+
+// Use a while loop to ensure work continues until either max hours or max days are reached
+while (totalEmpHrsLimit < MAX_HRS_IN_MONTH && totalWorkingDaysLimit < NUM_OF_WORKING_DAYS_LIMIT) {
+    totalWorkingDaysLimit++;
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    totalEmpHrsLimit += getWorkingHours(empCheck);
+    let empWageLimit = totalEmpHrsLimit * WAGE_PER_HOUR;
+
+    // Display running totals for days worked, hours worked, and wages
+    console.log(`Total Days: ${totalWorkingDaysLimit}, Total Hrs: ${totalEmpHrsLimit}, Emp Wage: ${empWageLimit}`);
+}
