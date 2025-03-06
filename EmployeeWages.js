@@ -4,7 +4,7 @@ let empCheck = Math.floor(Math.random() * 10) % 2;
 if (empCheck === IS_ABSENT) {
     console.log("Employee is Absent");
 } else {
-    console.log("Employee is PRESENT");
+    console.log("Employee is Present");
 } 
 
 // UC-2
@@ -29,4 +29,21 @@ switch (empCheckSwitch) {
 }
 
 let empWage = empHrs * WAGE_PER_HOUR;
-console.log("Emp Wage: " + empWage);
+console.log("Emp Wage: " + empWage); 
+
+// UC-3
+function getWorkingHours(empCheck) {
+        switch (empCheck) {
+            case IS_PART_TIME:
+                return PART_TIME_HOURS;
+            case IS_FULL_TIME:
+                return FULL_TIME_HOURS;
+            default:
+                return 0;
+        }
+    }
+    
+    let empCheckUC3 = Math.floor(Math.random() * 10) % 3;
+    let empHrsUC3 = getWorkingHours(empCheckUC3);
+    let empWageUC3 = empHrsUC3 * WAGE_PER_HOUR;
+    console.log("Emp Wage per working hours: " + empWageUC3);
