@@ -35,6 +35,64 @@ class EmployeePayrollData {
         }
     }
 
+    // Setter method for ID with UC-15 validation
+    set id(id) {
+        try {
+            // UC-15: Check if the ID is a non-zero positive number
+            if (id > 0) {
+                this._id = id; // Highlight: Valid ID
+            } else {
+                throw new Error('ID is Invalid!'); // Highlight: Invalid ID
+            }
+        } catch (error) {
+            console.error("UC15 - Error:", error.message); // Highlight: Error Handling
+        }
+    }
+
+    // Setter method for salary with UC-15 validation
+    set salary(salary) {
+        try {
+            // UC-15: Check if the salary is a non-zero positive number
+            if (salary > 0) {
+                this._salary = salary; // Highlight: Valid Salary
+            } else {
+                throw new Error('Salary is Invalid!'); // Highlight: Invalid Salary
+            }
+        } catch (error) {
+            console.error("UC15 - Error:", error.message); // Highlight: Error Handling
+        }
+    }
+
+    // Setter method for gender with UC-15 validation
+    set gender(gender) {
+        try {
+            // UC-15: Regex pattern to check if the gender is M or F
+            const genderPattern = /^[MF]$/;
+            if (genderPattern.test(gender)) {
+                this._gender = gender; // Highlight: Valid Gender
+            } else {
+                throw new Error('Gender is Invalid!'); // Highlight: Invalid Gender
+            }
+        } catch (error) {
+            console.error("UC15 - Error:", error.message); // Highlight: Error Handling
+        }
+    }
+
+    // Setter method for startDate with UC-15 validation
+    set startDate(startDate) {
+        try {
+            // UC-15: Check if the start date is not a future date
+            const currentDate = new Date();
+            if (startDate <= currentDate) {
+                this._startDate = startDate; // Highlight: Valid Start Date
+            } else {
+                throw new Error('Start Date is Invalid!'); // Highlight: Invalid Start Date
+            }
+        } catch (error) {
+            console.error("UC15 - Error:", error.message); // Highlight: Error Handling
+        }
+    }
+
     // toString method to return employee details as a formatted string
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
