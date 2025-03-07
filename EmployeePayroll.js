@@ -2,41 +2,6 @@
 
 // Creating Class EmployeePayrollData to store employee payroll details
 class EmployeePayrollData {
-    // Properties: id, name, salary
-    id;
-    salary;
-    
-    // Constructor to initialize employee payroll properties
-    constructor(params) {
-        this.id = params[0];
-        this.name = params[1];
-        this.salary = params[2];
-    }
-
-    // Getter method for name
-    get name() { return this._name; }
-
-    // Setter method for name
-    set name(name) { this._name = name; }
-
-    // toString method to return employee details as a formatted string
-    toString() {
-        return "id=" + this.id + ", name=" + this.name + ", salary=" + this.salary;
-    }
-}
-
-// Creating an EmployeePayrollData object with id, name, and salary
-let employeePayrollData = new EmployeePayrollData([1, "Mark", 30000]);
-console.log(employeePayrollData.toString());
-
-// Updating employee name using setter
-employeePayrollData.name = "John";
-console.log(employeePayrollData.toString());
-
-
-// UC-13: Extend Employee Payroll Data to store gender and start date
-
-class EmployeePayrollData {
     // Properties: id, name, salary, gender, startDate
     id;
     salary;
@@ -55,8 +20,20 @@ class EmployeePayrollData {
     // Getter method for name
     get name() { return this._name; }
 
-    // Setter method for name
-    set name(name) { this._name = name; }
+    // Setter method for name with UC-14 validation
+    set name(name) {
+        try {
+            // UC-14: Regex pattern to check if the name starts with a capital letter and has at least 3 characters
+            const namePattern = /^[A-Z][a-zA-Z]{2,}$/;
+            if (namePattern.test(name)) {
+                this._name = name; // Highlight: Valid name
+            } else {
+                throw new Error('Name is Invalid!'); // Highlight: Invalid name
+            }
+        } catch (error) {
+            console.error("UC14 - Error:", error.message); // Highlight: Error Handling
+        }
+    }
 
     // toString method to return employee details as a formatted string
     toString() {
@@ -68,5 +45,16 @@ class EmployeePayrollData {
 }
 
 // Creating an EmployeePayrollData object with id, name, salary, gender, and startDate
+let employeePayrollData = new EmployeePayrollData([1, "Mark", 30000, "M", new Date()]);
+console.log(employeePayrollData.toString());
+
+// Updating employee name using setter with UC-14 validation
+employeePayrollData.name = "John"; // This should pass
+console.log(employeePayrollData.toString());
+
+employeePayrollData.name = "jo"; // This should fail
+console.log(employeePayrollData.toString());
+
+// Creating another EmployeePayrollData object with all properties
 let newEmployeePayrollData = new EmployeePayrollData([2, "Terrisa", 30000, "F", new Date()]);
 console.log(newEmployeePayrollData.toString());
